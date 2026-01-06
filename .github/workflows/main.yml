@@ -1,0 +1,23 @@
+name: CI
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-HP-Laptop
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
